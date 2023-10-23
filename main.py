@@ -1,5 +1,6 @@
 from random import randint
 import bitarray
+import os
 
 # Функция для нахождения обратного элемента в поле Zq (расширенный алгоритм Евклида)
 def evclid_alg(a: int, b: int):
@@ -81,8 +82,8 @@ def decrypt(crypted_text, r, q, w):
         decrypted_text += byte_array.decode()
     return decrypted_text
 
-message = "hi my name is alina"
-w = {1, 3, 6, 20, 45, 82, 168, 326}
+message = os.getenv("message")
+w = eval(os.environ.get('w'))
 w_list = list(sorted(w))
 W, q, r, beta = generate_keys(w_list)
 enc = encrypt(message, beta)
